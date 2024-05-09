@@ -1,0 +1,36 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*BACKOFFICE STYLE*/
+
+#product{
+    width:100vw;
+    display: flex;
+}
+
+.infos{
+    width: 60%;
+    margin: 0 auto;
+}
+
+#nameProduct .form-control, #infoProduct .form-control, #brandProduct .form-control, #imageProduct .form-control {
+    height: 40px;
+}
+
+#brandProduct{
+    width: 30%;
+}
+
+#priceProduct{
+    width: 30%;
+}
+
+.home{
+    color:white;
+}
+
+
+
