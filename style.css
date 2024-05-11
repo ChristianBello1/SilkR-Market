@@ -32,5 +32,37 @@ html, body{
     color:white;
 }
 
+.footer{
+    width:100vw;
+    height: 100px;
+    margin-top: 40px;
+    background-color: #212529;
+}
 
 
+.card{
+    height: 550px;
+    width: 250px;
+    display: flex;
+}
+
+.card-img-top{
+    height: 300px;
+    width: 200px;
+    margin-left:10px;
+}
+
+#productContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+}
+
+#productContainer .card{
+    margin-left: 15px;
+}
+
+#productContainer .card-img-top{
+    margin-left: 25px;
+    margin-top: 15px;
+}
