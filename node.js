@@ -9,6 +9,12 @@ $(document).ready(function() {
         searchProducts(searchTerm); // Esegue la ricerca
     });
 
+    // Aggiungi un event listener per gestire il click sul bottone "Info Prodotto"
+    $(document).on("click", "#info", function() {
+        var product = $(this).closest(".card").data("product"); // Ottieni i dati del prodotto associato a questa card
+        displayExpandedProduct(product); // Mostra il prodotto espanso
+    });
+
     function loadProducts() {
         $.ajax({
             url: "https://striveschool-api.herokuapp.com/api/product/",
@@ -56,11 +62,35 @@ $(document).ready(function() {
             var cardDescription = $("<p class='card-text'></p>").text(product.description);
             var cardBrand = $("<p class='card-text'></p>").text("Marca: " + product.brand);
             var cardPrice = $("<p class='card-text'></p>").text("Prezzo: " + product.price + " €");
+            const details = $("<button id='info' type='button' class='btn btn-info'></button>").text("Info Prodotto");
 
-            cardBody.append(cardTitle, cardDescription, cardBrand, cardPrice);
+            cardBody.append(cardTitle, cardDescription, cardBrand, cardPrice, details);
             productCard.append(cardImage, cardBody);
+            productCard.data("product", product); // Aggiungi i dati del prodotto alla card
             productContainer.append(productCard);
         });
+    }
+
+    function displayExpandedProduct(product) {
+        // Svuota il productContainer
+        $("#productContainer").empty();
+
+        // Crea una nuova card più grande
+        var expandedCard = $("<div id='info1'></div>");
+
+        var cardImage = $("<img class='card-img-top' src='" + product.imageUrl + "' alt='" + product.name + "'>");
+        var cardBody = $("<div class='card-body'></div>");
+
+        var cardTitle = $("<h5 class='card-title'></h5>").text(product.name);
+        var cardDescription = $("<p id='descrip' class='card-text'></p>").text(product.description);
+        var cardBrand = $("<p id='mp' class='card-text'></p>").text("Marca: " + product.brand);
+        var cardPrice = $("<p class='card-text'></p>").text("Prezzo: " + product.price + " €");
+
+        cardBody.append(cardTitle, cardDescription, cardBrand, cardPrice);
+        expandedCard.append(cardImage, cardBody);
+
+        // Aggiungi la nuova card al productContainer
+        $("#productContainer").append(expandedCard);
     }
 
     // dimensione card in base alla grandezza della pagina
@@ -71,7 +101,7 @@ $(document).ready(function() {
         });
     });
 
-    // Aggiorna classi card in base alla grandezza della paginaaz
+    // Aggiorna classi card in base alla grandezza della pagina
     function updateCardClasses(card) {
         if ($(window).width() >= 1200) {
             card.addClass("col-xl-2");
@@ -83,7 +113,11 @@ $(document).ready(function() {
             card.addClass("col-6");
         }
     }
+
 });
+
+
+
 
 
 
